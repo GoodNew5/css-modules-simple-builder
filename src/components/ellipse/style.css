@@ -1,0 +1,15 @@
+.ellipse {
+	color: red;
+	border-radius: 50%;
+	display: block;
+	width: 300px;
+	height: 300px;
+	border: 4px #acb296	solid;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.ellipse-text {
+	color: tomato;
+}
