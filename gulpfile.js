@@ -112,7 +112,7 @@ gulp.task('generate:json', function() {
 
 
 gulp.task('remove:json', function() {
-  return gulp.src(['./scoped-modules/*.json', 'src/components/**/*.json', './src/pages/**/*.json'])
+  return gulp.src(['./scoped-modules/**/*.json', 'src/components/**/*.json', './src/pages/**/*.json'])
   .pipe(removeFiles())
 });
 
