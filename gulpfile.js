@@ -10,10 +10,14 @@ const removeFiles = require('gulp-remove-files');
 const folders = require('gulp-folders');
 const pathToFolder = 'src';
 const rename = require('gulp-rename');
+const precss = require('precss');
+const config = require('./postcss.config.js');
+const sass = require('gulp-sass');
+      sass.compiler = require('node-sass');
 
 
 const PATHS = {
-  styles: './src/**/*.css',
+  styles: './src/**/*.scss',
   templates: 'src/pages/**/*.pug'
 }
 
@@ -97,9 +101,11 @@ gulp.task('copy:structure_folders_modules', function () {
 
 
 
-gulp.task('generate:json', function() { 
+gulp.task('generate:json', function() {
   return gulp.src(PATHS.styles) 
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([
+      precss(),
       autoprefixer,
       modules({ getJSON: getJSONFromCssModules }),
     ]))
@@ -133,5 +139,5 @@ gulp.task('render:templates', function() {
 });
 
 
-gulp.task('default', gulp.series( 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates'));
+gulp.task('default', gulp.series('remove:json', 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates'));
 

@@ -1,3 +1,7 @@
+@mixin set-color($color) {
+	color: $color;
+}
+
 .ellipse {
 	color: red;
 	border-radius: 50%;
@@ -10,6 +14,7 @@
 	justify-content: center;
 	align-items: center;
 }
+
 .ellipse-text {
-	color: tomato;
+	@include set-color(tomato);
 }
