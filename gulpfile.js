@@ -40,28 +40,25 @@ function getJSONFromCssModules(cssFileName, json) {
 }
 
 
-// для вставки сгенерированного класса в шаблон получим файл необходимого модуля
-// прочтем его и переведем содержимое в строку
-// вернем значение по ключу obj[className]
-
-
-function makeMultipleClasses(classesFromJson, classNamesFromHTML) {
-    const objStyle = JSON.parse(classesFromJson)
-    const classes = classNamesFromHTML.split(' ');
+function makeMultipleClasses(classesFromJson, classesFromHTML) {
+    const classesJson = JSON.parse(classesFromJson)
+    const classesHTML = classesFromHTML.split(' ');
     let hashClassesStore = [];
 
-  
-    for ( key in objStyle ) {
-      hashClassesStore.push(objStyle[key])
-    }
+    classesHTML.forEach(item => {
+        if(classesJson[item]) {
+          hashClassesStore.push(classesJson[item])
+        }
+        else {
+          hashClassesStore.push(item);
+        }
+    });
 
     return hashClassesStore;
 }
 
 
 function getClass(module, className) {
-  // const currentModulePath = path.dirname(path.relative('src/',  module));
-  // console.log(rest)
   try {
 
     let moduleFileNameComponents  = path.resolve(`./scoped-modules/components/${module}/`, `${ module }.json`);
@@ -106,9 +103,6 @@ gulp.task('generate:json', function() {
     .pipe(concat('main.css'))
     .pipe(gulp.dest('./dist'));
 });
-
-
-// иногда может потребоваться удалить сгенерированные json, чтобы не делать этого руками создадим задачу remove:json
 
 
 gulp.task('remove:json', function() {
