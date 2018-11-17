@@ -2,7 +2,10 @@
 
 
 .main-page {
-	width: 100%;
+	height: 100%;
+	:global(.ellipse-global) {
+		background-color: gold;
+	}
 }
 
 .test {
