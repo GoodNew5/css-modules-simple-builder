@@ -29,6 +29,8 @@
     "gulp-pug": "^4.0.1",
     "gulp-remove-files": "0.0.3",
     "gulp-rename": "^1.4.0",
+    "gulp-sass-import": "^1.0.0",
+    "gulp-sass-partials-imported": "^1.0.6",
     "postcss-cli": "^6.0.1"
   },
   "optionalDependencies": {}

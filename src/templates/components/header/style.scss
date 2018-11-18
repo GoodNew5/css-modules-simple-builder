@@ -1,4 +1,4 @@
-//@import '../../../scss/abstract/vars';
+@import 'abstract/vars';
 
 @mixin set-color($color) {
   color: $color;
@@ -8,8 +8,12 @@
   box-sizing: content-box;
   max-width: 1100px;
   padding: 1rem calc(50% - 550px);
-  //background-color: $yellow;
+  background-color: $yellow;
   height: 100px;
+
+  &--black {
+    background-color: black;
+  }
 }
 
 .logo {

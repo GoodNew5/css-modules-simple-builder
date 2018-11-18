@@ -15,10 +15,13 @@ const config = require('./postcss.config.js');
 const browserSync = require('browser-sync');
 const sass = require('gulp-sass');
       sass.compiler = require('node-sass');
+const sassImport = require('gulp-sass-import');
+const sassPartialsImported = require('gulp-sass-partials-imported');
 
 
 const PATHS = {
-  styles: './src/templates/**/*.scss',
+  moduleStyles: 'src/templates/**/*.scss',
+  globalStyles: 'src/scss/app.scss',
   templates: 'src/templates/pages/**/*.pug'
 };
 
@@ -31,7 +34,6 @@ function getJSONFromCssModules(cssFileName, json) {
 
   fs.writeFileSync(jsonFileName, JSON.stringify(json));
 }
-
 
 function makeMultipleClasses(module, htmlClasses) {
     const classesModule = JSON.parse(module);
@@ -55,8 +57,6 @@ function makeMultipleClasses(module, htmlClasses) {
 
 function getClass(module, className) {
   // console.log(ctx);
-
-
   try {
 
     let moduleFileNamePagesDir  = path.resolve(`./scoped-modules/pages/${module}/`, `${ module }.json`);
@@ -85,30 +85,43 @@ gulp.task('copy:structure_folders_modules', function () {
     .pipe(gulp.dest('./scoped-modules'));
 });
 
-gulp.task('generate:json', function() {
-  return gulp.src(PATHS.styles)
-    .pipe(sass().on('error', sass.logError))
+gulp.task('compile:module_styles', function() {
+  return gulp.src([PATHS.moduleStyles])
+    .pipe(sass({includePaths : ['src/scss']}).on('error', sass.logError))
     .pipe(postcss([
       precss(),
       autoprefixer,
       modules({ getJSON: getJSONFromCssModules }),
     ]))
     .pipe(concat('main.css'))
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('dist'))
 });
 
+gulp.task('compile:global_styles', function () {
+  return gulp.src(PATHS.globalStyles)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('dist'))
+
+});
+
+gulp.task('merge:styles', function () {
+  return gulp.src('dist/*.css')
+    .pipe(concat('main.css'))
+
+    .pipe(gulp.dest('dist'))
+});
+
+gulp.task('styles', gulp.series('compile:global_styles', 'compile:module_styles', 'merge:styles'));
 
 gulp.task('remove:json', function() {
   return gulp.src(['./scoped-modules/**/*.json', 'src/components/**/*.json', './src/pages/**/*.json'])
   .pipe(removeFiles())
 });
 
-
 gulp.task('remove:templates', function() {
-  return gulp.src('./dist/**/*.html')
+  return gulp.src('./dist/**')
   .pipe(removeFiles())
 });
-
 
 gulp.task('render:templates', function() {
   return gulp.src(PATHS.templates)
@@ -119,9 +132,8 @@ gulp.task('render:templates', function() {
   .pipe(gulp.dest('./dist'))
 });
 
-
 gulp.task('watch', function(){
-  gulp.watch('./src/**/*.scss', gulp.series('generate:json', 'render:templates'));
+  gulp.watch('./src/**/*.scss', gulp.series('compile:module_styles', 'render:templates'));
 });
 
-gulp.task('run', gulp.series('remove:json', 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates', 'watch'));
+gulp.task('run', gulp.series('remove:json', 'copy:structure_folders_modules', 'styles', 'remove:templates', 'render:templates', 'watch'));
