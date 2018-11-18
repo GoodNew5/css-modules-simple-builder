@@ -13,6 +13,7 @@ const rename = require('gulp-rename');
 const precss = require('precss');
 const config = require('./postcss.config.js');
 const browserSync = require('browser-sync');
+const sassPartialsImported = require('gulp-sass-partials-imported');
 const sass = require('gulp-sass');
       sass.compiler = require('node-sass');
 
@@ -91,8 +92,8 @@ gulp.task('copy:structure_folders_modules', function () {
 
 gulp.task('generate:json', function() {
   return gulp.src(PATHS.styles)
-
-    .pipe(sass({includePaths: ['./src/global-styles/_mixins.scss', './src/global-styles/_vars.scss']}).on('error', sass.logError))
+    .pipe(sassPartialsImported(PATHS, ['src/global-styles/']))
+    .pipe(sass({includePaths: [PATHS]}).on('error', sass.logError))
     .pipe(postcss([
       precss(),
       autoprefixer,

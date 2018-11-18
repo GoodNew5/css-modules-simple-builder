@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ec3cf96-7592-4624-a015-2ce9a0720a21" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/global-styles/_mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/global-styles/_vars.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/global-styles/common.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ellipse/ellipse.pug" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ellipse/style.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/example/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/example/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/layout.pug" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/layout.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/example/example.pug" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/example/example.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/example/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/example/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index/index.pug" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index/index.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index/style.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -86,7 +73,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="227" />
+          <entry key="js" value="272" />
           <entry key="pug" value="206" />
           <entry key="scss" value="510" />
         </counts>
@@ -94,7 +81,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Jade" value="206" />
-          <entry key="JavaScript" value="227" />
+          <entry key="JavaScript" value="272" />
           <entry key="SCSS" value="510" />
         </counts>
       </usages-collector>
@@ -166,7 +153,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/header/style.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="224">
-              <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -223,8 +210,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gulpfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="812">
-              <caret line="94" column="98" selection-start-line="94" selection-start-column="98" selection-end-line="94" selection-end-column="98" />
+            <state relative-caret-position="756">
+              <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -241,7 +228,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/global-styles/reset.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1708">
+            <state relative-caret-position="1169">
               <caret line="61" column="2" selection-start-line="61" selection-start-column="2" selection-end-line="61" selection-end-column="2" />
             </state>
           </provider>
@@ -465,12 +452,12 @@
       <workItem from="1542467706054" duration="294000" />
       <workItem from="1542468148708" duration="687000" />
       <workItem from="1542475554539" duration="3281000" />
-      <workItem from="1542529685209" duration="12079000" />
+      <workItem from="1542529685209" duration="14028000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24002000" />
+    <option name="totallyTimeSpent" value="25951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1012" y="23" width="1547" height="1412" extended-state="0" />
@@ -530,9 +517,6 @@
           <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/index/style.scss">
       <provider selected="true" editor-type-id="text-editor">
@@ -600,38 +584,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/global-styles/_vars.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/global-styles/_mixins.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="16" column="45" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/global-styles/reset.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1708">
-          <caret line="61" column="2" selection-start-line="61" selection-start-column="2" selection-end-line="61" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/global-styles/common.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -649,14 +605,45 @@
     <entry file="file://$PROJECT_DIR$/src/components/header/style.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
-          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global-styles/_vars.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global-styles/_mixins.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="25" column="14" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global-styles/reset.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1169">
+          <caret line="61" column="2" selection-start-line="61" selection-start-column="2" selection-end-line="61" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/global-styles/common.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="812">
-          <caret line="94" column="98" selection-start-line="94" selection-start-column="98" selection-end-line="94" selection-end-column="98" />
+        <state relative-caret-position="756">
+          <caret line="95" column="36" selection-start-line="95" selection-start-column="36" selection-end-line="95" selection-end-column="36" />
         </state>
       </provider>
     </entry>
