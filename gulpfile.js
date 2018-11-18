@@ -12,6 +12,7 @@ const pathToFolder = 'src';
 const rename = require('gulp-rename');
 const precss = require('precss');
 const config = require('./postcss.config.js');
+const browserSync = require('browser-sync');
 const sass = require('gulp-sass');
       sass.compiler = require('node-sass');
 
@@ -53,22 +54,22 @@ function makeMultipleClasses(module, htmlClasses) {
 }
 
 
-function getClass(module, className, ctx) {
-  console.log(ctx);
+function getClass(module, className) {
+  // console.log(ctx);
 
 
   try {
 
     let moduleFileNamePagesDir  = path.resolve(`./scoped-modules/pages/${module}/`, `${ module }.json`);
-  
-  
+
+
     return makeMultipleClasses(fs.readFileSync(moduleFileNamePagesDir).toString(), className);
 
   }
   catch(error) {
 
     let moduleFileNameComponents  = path.resolve(`./scoped-modules/components/${module}/`, `${ module }.json`);
-  
+
 
     return makeMultipleClasses(fs.readFileSync(moduleFileNameComponents).toString(), className);
   }
@@ -89,15 +90,16 @@ gulp.task('copy:structure_folders_modules', function () {
 
 
 gulp.task('generate:json', function() {
-  return gulp.src(PATHS.styles) 
-    .pipe(sass().on('error', sass.logError))
+  return gulp.src(PATHS.styles)
+
+    .pipe(sass({includePaths: ['./src/global-styles/_mixins.scss', './src/global-styles/_vars.scss']}).on('error', sass.logError))
     .pipe(postcss([
       precss(),
       autoprefixer,
       modules({ getJSON: getJSONFromCssModules }),
     ]))
     .pipe(concat('main.css'))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist'))
 });
 
 
@@ -124,5 +126,11 @@ gulp.task('render:templates', function() {
 });
 
 
+
 gulp.task('default', gulp.series('remove:json', 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates'));
 
+gulp.task('watch', function(){
+  gulp.watch('./src/**/*.scss', gulp.series('generate:json', 'render:templates'));
+});
+
+gulp.task('run', gulp.series('remove:json', 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates', 'watch'));

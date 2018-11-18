@@ -1,21 +1,11 @@
 
-
-
-.main-page {
-	height: 100%;
-	:global(.ellipse-global) {
-		background-color: gold;
-	}
+.dop-element {
+  height: 100%;
+  :global(.dop-element) {
+    background-color: gold;
+  }
 }
 
-.test {
-	color: tomato;
-}
-
-.test-1 {
-	color: pink;
-}
-
-.test-2 {
-	color: gray;
+.dop-element {
+  color: tomato;
 }
