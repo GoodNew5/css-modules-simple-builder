@@ -18,15 +18,14 @@ const sass = require('gulp-sass');
 
 
 const PATHS = {
-  styles: './src/**/*.scss',
-  templates: 'src/pages/**/*.pug'
-}
-
+  styles: './src/templates/**/*.scss',
+  templates: 'src/templates/pages/**/*.pug'
+};
 
 
 function getJSONFromCssModules(cssFileName, json) {
   const moduleName = path.basename(path.dirname(cssFileName));
-  const currentModulePath = path.dirname(path.relative('src/',  cssFileName));
+  const currentModulePath = path.dirname(path.relative('src/templates',  cssFileName));
 
   const jsonFileName  = path.resolve(`./scoped-modules/${currentModulePath}`, moduleName + '.json');
 
@@ -35,7 +34,7 @@ function getJSONFromCssModules(cssFileName, json) {
 
 
 function makeMultipleClasses(module, htmlClasses) {
-    const classesModule = JSON.parse(module)
+    const classesModule = JSON.parse(module);
     const classesHTML = htmlClasses.split(' ');
     let hashClassesStore = [];
 
@@ -81,18 +80,14 @@ const style = {
 };
 
 
-
 gulp.task('copy:structure_folders_modules', function () {
-  return gulp.src('src/**/')
+  return gulp.src('./src/templates/**/')
     .pipe(gulp.dest('./scoped-modules'));
 });
 
-
-
 gulp.task('generate:json', function() {
   return gulp.src(PATHS.styles)
-
-    .pipe(sass({includePaths: ['./src/global-styles/_mixins.scss', './src/global-styles/_vars.scss']}).on('error', sass.logError))
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([
       precss(),
       autoprefixer,
@@ -119,15 +114,11 @@ gulp.task('render:templates', function() {
   return gulp.src(PATHS.templates)
   .pipe(pug({
     pretty: true,
-    locals: style,
-    basedir: 'pages'
+    locals: style
   }))
   .pipe(gulp.dest('./dist'))
 });
 
-
-
-gulp.task('default', gulp.series('remove:json', 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates'));
 
 gulp.task('watch', function(){
   gulp.watch('./src/**/*.scss', gulp.series('generate:json', 'render:templates'));
