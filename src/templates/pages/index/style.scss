@@ -1,11 +1,7 @@
 
 .dop-element {
-  height: 100%;
-  :global(.dop-element) {
-    background-color: gold;
+  @include ellipse(300px) {
+    background-color: $yellow;
+    overflow: hidden;
   }
-}
-
-.dop-element {
-  color: tomato;
 }

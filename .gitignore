@@ -1,4 +1,5 @@
 /scoped-modules
 /dist
 /node_modules
-.idea/
+.idea
+.idea/workspace.xml
