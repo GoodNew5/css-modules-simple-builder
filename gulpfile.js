@@ -13,21 +13,19 @@ const rename = require('gulp-rename');
 const precss = require('precss');
 const config = require('./postcss.config.js');
 const browserSync = require('browser-sync');
-const sassPartialsImported = require('gulp-sass-partials-imported');
 const sass = require('gulp-sass');
       sass.compiler = require('node-sass');
 
 
 const PATHS = {
-  styles: './src/**/*.scss',
-  templates: 'src/pages/**/*.pug'
-}
-
+  styles: './src/templates/**/*.scss',
+  templates: 'src/templates/pages/**/*.pug'
+};
 
 
 function getJSONFromCssModules(cssFileName, json) {
   const moduleName = path.basename(path.dirname(cssFileName));
-  const currentModulePath = path.dirname(path.relative('src/',  cssFileName));
+  const currentModulePath = path.dirname(path.relative('src/templates',  cssFileName));
 
   const jsonFileName  = path.resolve(`./scoped-modules/${currentModulePath}`, moduleName + '.json');
 
@@ -36,7 +34,7 @@ function getJSONFromCssModules(cssFileName, json) {
 
 
 function makeMultipleClasses(module, htmlClasses) {
-    const classesModule = JSON.parse(module)
+    const classesModule = JSON.parse(module);
     const classesHTML = htmlClasses.split(' ');
     let hashClassesStore = [];
 
@@ -82,18 +80,15 @@ const style = {
 };
 
 
-
 gulp.task('copy:structure_folders_modules', function () {
-  return gulp.src('src/**/')
+  return gulp.src('./src/templates/**/')
     .pipe(gulp.dest('./scoped-modules'));
 });
 
 
-
 gulp.task('generate:json', function() {
   return gulp.src(PATHS.styles)
-    .pipe(sassPartialsImported(PATHS, ['src/global-styles/']))
-    .pipe(sass({includePaths: [PATHS]}).on('error', sass.logError))
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([
       precss(),
       autoprefixer,
@@ -120,15 +115,11 @@ gulp.task('render:templates', function() {
   return gulp.src(PATHS.templates)
   .pipe(pug({
     pretty: true,
-    locals: style,
-    basedir: 'pages'
+    locals: style
   }))
   .pipe(gulp.dest('./dist'))
 });
 
-
-
-gulp.task('default', gulp.series('remove:json', 'copy:structure_folders_modules', 'generate:json', 'remove:templates', 'render:templates'));
 
 gulp.task('watch', function(){
   gulp.watch('./src/**/*.scss', gulp.series('generate:json', 'render:templates'));
