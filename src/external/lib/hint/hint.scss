@@ -1,0 +1,162 @@
+/*
+How to use
+  $target - element !required parameter
+
+  example:
+    markup - <div class="hint" aria-label="hint text"></div>
+    scss - @include hint('hint');
+*/
+
+@mixin hint($target, $placementTooltip: right, $pseudo: 'before', $displayTriangle: true, $triangleWidth: 20px, $triangleHeight: 20px, $triangleFill: black) {
+  $trianglePseudo: '';
+
+  @if($pseudo == 'before') {
+    $trianglePseudo: 'after'
+  }
+
+  @if($pseudo == 'after') {
+    $trianglePseudo: 'before'
+  }
+
+  .h-center {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  #{$target} {
+
+    &:#{$pseudo} {
+      content: attr(aria-label);
+      position: absolute;
+      display: block;
+      cursor: default;
+      visibility: hidden;
+      opacity: 0;
+      transition: .3s;
+
+      @if($placementTooltip == 'top') {
+
+        @if($displayTriangle) {
+          bottom: calc(100% + #{$triangleHeight});
+        }
+
+        @else {
+          bottom: 100%;
+        }
+
+        @extend .h-center;
+      }
+
+      @if($placementTooltip == 'right') {
+        top: 0;
+
+        @if($displayTriangle) {
+          left: calc(100% + #{$triangleWidth});
+        }
+
+        @else {
+          left: 100%;
+        }
+
+      }
+
+      @if($placementTooltip == 'left') {
+        top: 0;
+
+        @if($displayTriangle) {
+          right: calc(100% + #{$triangleWidth});
+        }
+
+        @else {
+          right: 100%;
+        }
+
+      }
+
+      @if($placementTooltip == 'bottom') {
+
+        @if($displayTriangle) {
+          top: calc(100% + #{$triangleHeight});
+        }
+
+        @else {
+          top: 100%;
+        }
+
+        @extend .h-center;
+
+      }
+
+      @if(type-of($placementTooltip) == map) {
+        top: map-get($placementTooltip, top);
+        bottom: map-get($placementTooltip, bottom);
+        left: map-get($placementTooltip, left);
+        right: map-get($placementTooltip, right);
+      }
+
+      @content;
+    }
+
+    &:hover {
+      &:#{$pseudo}, &:#{$trianglePseudo} {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+
+    @if($displayTriangle) {
+
+      &:#{$trianglePseudo} {
+        content: '';
+        display: block;
+        transition: .3s;
+        position: absolute;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        opacity: 0;
+
+
+        @if($placementTooltip == 'right') {
+          border-left: 0 transparent solid;
+          border-top: $triangleHeight transparent solid;
+          border-bottom: $triangleHeight transparent solid;
+          border-right: $triangleWidth solid $triangleFill;
+          left: 100%;
+          top: 0;
+        }
+
+        @if($placementTooltip == 'left') {
+          border-left: $triangleWidth $triangleFill solid;
+          border-right: 0 transparent solid;
+          border-bottom: $triangleHeight transparent solid;
+          border-top: $triangleHeight transparent solid;
+          top: 0;
+          right: 100%;
+        }
+
+        @if($placementTooltip == 'bottom') {
+          border-left: $triangleWidth transparent solid;
+          border-right: $triangleWidth transparent solid;
+          border-top: 0 transparent solid;
+          border-bottom: $triangleHeight $triangleFill solid;
+          top: 100%;
+          @extend .h-center;
+        }
+
+        @if($placementTooltip == 'top') {
+          border-left: $triangleWidth transparent solid;
+          border-right: $triangleWidth transparent solid;
+          border-bottom: 0 transparent solid;
+          border-top: $triangleHeight $triangleFill solid;
+          bottom: 100%;
+          @extend .h-center;
+        }
+      }
+    }
+  }
+}

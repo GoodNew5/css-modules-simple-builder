@@ -1,0 +1,15 @@
+/*
+How to use
+  $element - element !required parameter
+*/
+
+@mixin truncated ($element, $display: flex) {
+  min-width: 0;
+  display: $display;
+
+  #{$element} {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -144,7 +144,7 @@ gulp.task('remove:json', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('./src/**/*.scss', gulp.series('compile:module_styles', 'render:templates'));
+  gulp.watch(['./src/**/*.scss', './src/templates/**/*.pug'], gulp.series('compile:module_styles', 'render:templates'));
 });
 
 gulp.task('run', gulp.series('remove:json','remove:templates', 'copy:structure_folders_modules', 'build:styles', 'render:templates', 'watch'));
