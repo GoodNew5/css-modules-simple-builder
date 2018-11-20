@@ -1,3 +1,18 @@
+@import "../external/lib/hint/hint.scss";
+
 .example-page {
-  color: pink;
+  color: black;
+  font-size: 3rem;
+}
+
+.hint {
+  position: relative;
+  display: inline-block;
+  color: deeppink;
+}
+
+@include hint('.hint', $triangleHeight: 5px, $triangleWidth: 5px) {
+  width: 10rem;
+  background-color: black;
+  color: aquamarine;
 }

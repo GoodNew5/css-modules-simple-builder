@@ -127,6 +127,8 @@ How to use
           border-bottom: $triangleHeight transparent solid;
           border-right: $triangleWidth solid $triangleFill;
           left: 100%;
+          bottom: 0;
+          margin: auto;
           top: 0;
         }
 

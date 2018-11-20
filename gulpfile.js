@@ -10,6 +10,7 @@ const removeFiles = require('gulp-remove-files');
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 const map = require('map-stream');
+const flatten = require('gulp-flatten');
 
 const PATHS = {
   moduleStyles: 'src/templates/**/*.scss',
@@ -127,14 +128,15 @@ gulp.task('remove:templates', function () {
 });
 
 gulp.task('render:templates', function () {
-  return gulp.src(PATHS.templates)
+  return gulp.src(PATHS.templates, { basedir: '' })
     .on('data', function (file) {
-      let relativeFilePath = file.relative;
-    })
+        let relativeFilePath = file.relative;
+      })
     .pipe(pug({
       pretty: true,
       locals: className = getClass
     }))
+    .pipe(flatten())
     .pipe(gulp.dest('./dist'))
 });
 
@@ -144,7 +146,7 @@ gulp.task('remove:json', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./src/**/*.scss', './src/templates/**/*.pug'], gulp.series('compile:module_styles', 'render:templates'));
+  gulp.watch(['./src/**/*.scss', './src/templates/**/*.pug'], gulp.series('build:styles', 'render:templates'));
 });
 
 gulp.task('run', gulp.series('remove:json','remove:templates', 'copy:structure_folders_modules', 'build:styles', 'render:templates', 'watch'));
