@@ -1,22 +1,54 @@
-//@import '../../../scss/abstract/vars';
-
-@mixin set-color($color) {
-  color: $color;
-}
-
 .header {
+  display: grid;
+  grid-template-columns: 2fr 4fr 3fr 3fr;
+  grid-template-rows: auto;
+  align-content: center;
   box-sizing: content-box;
   max-width: 1100px;
   padding: 1rem calc(50% - 550px);
   background-color: $yellow;
   height: 100px;
+  font-size: 20px;
 }
 
 .logo {
-  @include set-color(tomato);
 }
 
 .search {
-  width: 200px;
+  max-width: 360px;
   height: 50px;
+
+  input {
+    width: 100%;
+    height: 100%;
+    background-color: $yellow-deep;
+    color: $white;
+    font-size: 1.4rem;
+    @include placeholder {
+      color: $white;
+    }
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .item {
+    color: $gray;
+  }
+}
+
+.sign {
+  display: flex;
+  align-items: center;
+
+  .up {
+
+  }
+
+  .in {
+
+  }
 }

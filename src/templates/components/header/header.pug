@@ -1,4 +1,14 @@
-header(class=locals.className('header', 'header'))
+header(class=className('header', 'header'))
     block header
-        div(class=locals.className('header', 'logo')) Logo
-        input(class=locals.className('header', 'search') placeholder='Search')
+        div(class=className('header', 'logo'))
+        div(class=className('header', 'search'))
+            input(placeholder='Search for projects or forum topics')
+
+        div(class=className('header', 'nav'))
+            div(class=className('header', 'item')) Learn
+            div(class=className('header', 'item')) Projects
+            div(class=className('header', 'item')) Forums
+
+        div(class=className('header', 'sign'))
+            div(class=className('header', 'up')) Register
+            div(class=className('header', 'in')) Log in With Github

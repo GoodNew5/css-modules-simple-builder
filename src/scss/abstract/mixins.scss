@@ -1,27 +1,30 @@
-@mixin optional-at-root($sel) {
-  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
-    @content;
-  }
-}
-
 @mixin placeholder {
-  @include optional-at-root('::-webkit-input-placeholder') {
-    @content;
-  }
-
-  @include optional-at-root(':-moz-placeholder') {
-    @content;
-  }
-
-  @include optional-at-root('::-moz-placeholder') {
-    @content;
-  }
-
-  @include optional-at-root(':-ms-input-placeholder') {
-    @content;
-  }
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
 }
 
-@include placeholder {
-  color: #fff;
+@mixin button($color: $gray, $width: 19.4rem, $height: 5rem, $font-size: 1.4rem, $fill: transparent, $display: flex) {
+  color: $color;
+  width: $width;
+  height: $height;
+  border-radius: .4rem;
+  display: $display;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
+  font-size: $font-size;
+  background-color: $fill;
+  cursor: pointer;
+  overflow: hidden;
+  @content;
+}
+
+@mixin ellipse($size: 10rem, $display: block) {
+  border-radius: 50%;
+  display: $display;
+  width: $size;
+  height: $size;
+  @content;
 }
