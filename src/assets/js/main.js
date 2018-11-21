@@ -1,4 +1,3 @@
 const smallestDivisor = () => {
-  const testBabel = 2;
-  return console.log(testBabel)
+  return console.log(2)
 };

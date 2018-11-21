@@ -13,11 +13,6 @@
 
 .logo {
   @extend .svg-logo;
-  opacity: .5;
-  transition: opacity .2s ease;
-  &:hover {
-    opacity: 1;
-  }
 }
 
 .search {

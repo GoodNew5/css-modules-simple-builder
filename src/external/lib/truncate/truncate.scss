@@ -3,7 +3,7 @@ How to use
   $element - element !required parameter
 */
 
-@mixin truncated ($element, $display: flex) {
+@mixin truncate ($element, $display: flex) {
   min-width: 0;
   display: $display;
 
