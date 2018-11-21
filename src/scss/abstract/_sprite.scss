@@ -1,0 +1,18 @@
+%svg-common {
+  background: url("svg/sprite.svg") no-repeat;
+}
+
+.svg-logo {
+@extend %svg-common;
+background-position: 0 0;
+width: 156px;
+height: 48px;
+}
+
+.svg-search-icon {
+@extend %svg-common;
+background-position: 0 100%;
+width: 21px;
+height: 21px;
+}
+

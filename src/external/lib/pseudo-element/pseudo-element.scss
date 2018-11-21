@@ -1,0 +1,7 @@
+@mixin pseudo-element($element: 'before', $content: '', $display: block) {
+  &:#{$element} {
+    content: $content;
+    display: $display;
+    @content;
+  }
+}

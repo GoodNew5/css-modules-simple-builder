@@ -1,0 +1,8 @@
+@mixin layer($color: transparentize(black, 0.5), $position: absolute) {
+  background-color: $color;
+  position: $position;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}

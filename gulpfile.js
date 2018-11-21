@@ -12,6 +12,8 @@ sass.compiler = require('node-sass');
 const map = require('map-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
+const flatten = require('gulp-flatten');
+const svgSprite = require('gulp-svg-sprite');
 const PATHS = {
   moduleStyles: 'src/templates/**/*.scss',
   globalStyles: 'src/scss/app.scss',
@@ -20,7 +22,8 @@ const PATHS = {
 
 const GLOBAL_IMPOPTS_SCSS = [
   "./src/scss/abstract/vars.scss",
-  "./src/scss/abstract/mixins.scss"
+  "./src/scss/abstract/mixins.scss",
+  "./src/scss/abstract/_sprite.scss"
 ];
 
 
@@ -123,19 +126,20 @@ gulp.task('remove:originalStyles', function () {
 gulp.task('build:styles', gulp.series('compile:global_styles', 'compile:module_styles', 'merge:styles', 'remove:originalStyles'));
 
 gulp.task('remove:templates', function () {
-  return gulp.src('./dist/**')
+  return gulp.src('./dist/*.html')
     .pipe(removeFiles())
 });
 
 gulp.task('render:templates', function () {
-  return gulp.src(PATHS.templates)
+  return gulp.src(PATHS.templates, { basedir: '' })
     .on('data', function (file) {
-      let relativeFilePath = file.relative;
-    })
+        let relativeFilePath = file.relative;
+      })
     .pipe(pug({
       pretty: true,
       locals: className = getClass
     }))
+    .pipe(flatten())
     .pipe(gulp.dest('./dist'))
 });
 
@@ -164,11 +168,45 @@ gulp.task('copy:assets', function(){
 });
 
 
+gulp.task('generate:svg', function() {
+  return gulp.src('./src/assets/svg/*.svg')
+    .pipe(svgSprite({
+      // shape: {
+      //   dimension: { // Set maximum dimensions
+      //     maxWidth: 38,
+      //     maxHeight: 38
+      //   },
+      //   spacing: { // Add padding
+      //     padding: 2
+      //   }
+      // },
+      mode:{
+        css:{
+          dest: './src/scss/abstract/',
+          bust: false,
+          sprite: '../../../dist/svg/sprite.svg',
+          dimensions: true,
+          render:{
+            scss: {
+              template: './src/scss/abstract/sprite-template.scss',
+              dest: '_sprite.scss'
+            }
+          }
+        }
+      },
+      svg:{
+        doctypeDeclaration: false
+      }
+    }))
+    .pipe(gulp.dest('./'));
+});
+
 
 gulp.task('watch', function () {
   gulp.watch(['./src/**/*.scss', './src/templates/**/*.pug'], gulp.series('build:styles', 'render:templates'));
-  gulp.watch(['./src/assets/**/*.*'], gulp.task('copy:assets'));
+  gulp.watch(['./src/assets/{fonts,images}/**'], gulp.task('copy:assets'));
+  gulp.watch(['./src/asset/{svg}/**'], gulp.task('generate:svg'));
 });
 
-gulp.task('run', gulp.series('remove:json','remove:templates', 'copy:structure_folders_modules', 'copy:assets', 'build:styles', 'render:templates', 'watch'));
+gulp.task('run', gulp.series('remove:json','remove:templates', 'copy:structure_folders_modules', 'copy:assets', 'generate:svg', 'build:styles', 'render:templates', 'watch'));
 
