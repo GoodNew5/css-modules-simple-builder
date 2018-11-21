@@ -6,11 +6,12 @@ const path = require('path');
 const fs = require('fs');
 const pug = require('gulp-pug');
 const concat = require('gulp-concat');
-const removeFiles = require('gulp-remove-files');
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
 const map = require('map-stream');
 const flatten = require('gulp-flatten');
+const sync = require('browser-sync').create();
+const clean = require('gulp-clean');
 
 const PATHS = {
   moduleStyles: 'src/templates/**/*.scss',
@@ -96,11 +97,14 @@ gulp.task('compile:module_styles', function () {
     .pipe(sass({includePaths: ['src/scss']}).on('error', sass.logError))
     .pipe(postcss([
       autoprefixer,
-      modules({getJSON: getJSONFromCssModules}),
+      modules({
+        getJSON: getJSONFromCssModules,
+        generateScopedName: '[name]__[local]___[hash:base64:5]'
+      }),
     ]))
     .pipe(concat('main.css'))
     .pipe(gulp.dest('dist'))
-
+    .pipe(sync.stream());
 });
 
 gulp.task('compile:global_styles', function () {
@@ -109,22 +113,9 @@ gulp.task('compile:global_styles', function () {
     .pipe(gulp.dest('dist'))
 });
 
-gulp.task('merge:styles', function () {
-  return gulp.src('./dist/*.css')
-    .pipe(concat('main.css'))
-    .pipe(gulp.dest('dist'));
-});
-
-gulp.task('remove:originalStyles', function () {
-  return gulp.src('./dist/app.css')
-    .pipe(removeFiles())
-});
-
-gulp.task('build:styles', gulp.series('compile:global_styles', 'compile:module_styles', 'merge:styles', 'remove:originalStyles'));
-
-gulp.task('remove:templates', function () {
-  return gulp.src('./dist/**')
-    .pipe(removeFiles())
+gulp.task('remove:dist', function () {
+  return gulp.src('./dist', {read: false})
+    .pipe(clean())
 });
 
 gulp.task('render:templates', function () {
@@ -132,8 +123,11 @@ gulp.task('render:templates', function () {
     .on('data', function (file) {
         let relativeFilePath = file.relative;
       })
+
     .pipe(pug({
       pretty: true,
+      cache: true,
+      basedir: './src/templates',
       locals: className = getClass
     }))
     .pipe(flatten())
@@ -141,13 +135,31 @@ gulp.task('render:templates', function () {
 });
 
 gulp.task('remove:json', function () {
-  return gulp.src('./scoped-modules/**/*.json')
-    .pipe(removeFiles())
+  return gulp.src('./scoped-modules', {read: false})
+    .pipe(clean())
 });
 
-gulp.task('watch', function () {
-  gulp.watch(['./src/**/*.scss', './src/templates/**/*.pug'], gulp.series('build:styles', 'render:templates'));
+gulp.task('serve', function () {
+  sync.init({
+    server: "./dist",
+    host: '3010',
+    open: false,
+    notify: false,
+    watch: true
+  });
+
+  gulp.watch('./src/templates/**/*.scss', gulp.series('compile:module_styles', 'render:templates'));
+  gulp.watch('./src/scss/*.scss', gulp.series('compile:global_styles'));
+  gulp.watch('./src/templates/**/*.pug', gulp.series('render:templates'));
+
+  gulp.watch("dist/*.html").on('change', function () {
+    sync.reload({stream: true})
+  })
 });
 
-gulp.task('run', gulp.series('remove:json','remove:templates', 'copy:structure_folders_modules', 'build:styles', 'render:templates', 'watch'));
+gulp.task('run', gulp.series(
+  gulp.parallel(gulp.series('remove:json', 'copy:structure_folders_modules'), 'remove:dist'),
+  gulp.parallel('compile:global_styles', 'compile:module_styles'),
+  'render:templates',
+  'serve'));
 
