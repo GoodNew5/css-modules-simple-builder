@@ -1,14 +1,20 @@
 header(class=className('header', 'header'))
     block header
+
         div(class=className('header', 'logo'))
         div(class=className('header', 'search'))
             input(placeholder='Search for projects or forum topics')
 
         div(class=className('header', 'nav'))
-            div(class=className('header', 'item')) Learn
-            div(class=className('header', 'item')) Projects
-            div(class=className('header', 'item')) Forums
+            a(class=className('header', 'item'), href="#") Learn
+            a(class=className('header', 'item'), href="#") Projects
+            a(class=className('header', 'item'), href="#") Forums
 
         div(class=className('header', 'sign'))
-            div(class=className('header', 'up')) Register
-            div(class=className('header', 'in')) Log in With Github
+            button(class=className('header', 'btn')) Register
+            button(class=className('header', 'btn')) Log in With Github
+
+        div(class=className('header', 'nav-btn'), class='nav-btn-js')
+            div(class=className('header', 'top'))
+            div(class=className('header', 'mid'))
+            div(class=className('header', 'bottom'))

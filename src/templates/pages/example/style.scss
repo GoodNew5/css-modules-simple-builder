@@ -1,55 +1,55 @@
-@import "../external/lib/hint/hint";
-@import "../external/lib/truncate/truncate";
-
-.example-page {
-  font-size: 3rem;
-  color: black;
-}
-
-.hint {
-  position: relative;
-  display: inline-block;
-}
-
-@include hint('.hint', $triangleHeight: 5px, $triangleWidth: 5px) {
-  width: 10rem;
-  background-color: black;
-  color: aquamarine;
-}
-
-.box {
-  border: .3rem darkred solid;
-  width: 10rem;
-  height: 10rem;
-}
-
-.user {
-  display: flex;
-  width: 20rem;
-  border: .1rem black solid;
-  font-size: 1.5rem;
-  align-items: center;
-  background-size: contain;
-  margin-left: 20rem;
-  margin-bottom: 10rem;
-}
-
-.user-avatar {
-  @include ellipse(5rem);
-  flex-shrink: 0;
-  border: .2rem deeppink solid;
-  margin-right: 1rem;
-}
-
-.user-name {
-  @include truncate('.user-name-text');
-}
-
-.user-name-text-color {
-  color: aquamarine;
-}
-
-.some-text {
-  color: olive;
-  text-decoration: underline;
-}
+//@import "../external/lib/hint/hint";
+//@import "../external/lib/truncate/truncate";
+//
+//.example-page {
+//  font-size: 3rem;
+//  color: black;
+//}
+//
+//.hint {
+//  position: relative;
+//  display: inline-block;
+//}
+//
+//@include hint('.hint', $triangleHeight: 5px, $triangleWidth: 5px) {
+//  width: 10rem;
+//  background-color: black;
+//  color: aquamarine;
+//}
+//
+//.box {
+//  border: .3rem darkred solid;
+//  width: 10rem;
+//  height: 10rem;
+//}
+//
+//.user {
+//  display: flex;
+//  width: 20rem;
+//  border: .1rem black solid;
+//  font-size: 1.5rem;
+//  align-items: center;
+//  background-size: contain;
+//  margin-left: 20rem;
+//  margin-bottom: 10rem;
+//}
+//
+//.user-avatar {
+//  @include ellipse(5rem);
+//  flex-shrink: 0;
+//  border: .2rem deeppink solid;
+//  margin-right: 1rem;
+//}
+//
+//.user-name {
+//  @include truncate('.user-name-text');
+//}
+//
+//.user-name-text-color {
+//  color: aquamarine;
+//}
+//
+//.some-text {
+//  color: olive;
+//  text-decoration: underline;
+//}

@@ -158,7 +158,7 @@ gulp.task('compile:js', function() {
 
 
 gulp.task('copy:assets', function(){
-  return gulp.src(['src/assets/{fonts,images}/**'])
+  return gulp.src(['src/assets/{fonts,images}/**/*'])
     .pipe(gulp.dest('./dist'));
 });
 
@@ -166,11 +166,7 @@ gulp.task('copy:assets', function(){
 gulp.task('generate:svg', function() {
   return gulp.src('./src/assets/svg/*.svg')
     .pipe(svgSprite({
-      // shape: {
-      //   dimension: { // Set maximum dimensions
-      //     maxWidth: 38,
-      //     maxHeight: 38
-      //   },
+      // shape:
       //   spacing: { // Add padding
       //     padding: 2
       //   }
@@ -181,6 +177,7 @@ gulp.task('generate:svg', function() {
           bust: false,
           sprite: '../../../dist/svg/sprite.svg',
           dimensions: true,
+          prefix : "@mixin sprite-%s",
           render:{
             scss: {
               template: './src/scss/abstract/sprite-template.scss',
@@ -227,4 +224,3 @@ gulp.task('run', gulp.series(
   'copy:assets',
   'generate:svg',
   'serve'));
-

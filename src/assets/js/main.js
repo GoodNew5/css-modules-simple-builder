@@ -1,3 +1,3 @@
-const smallestDivisor = () => {
-  return console.log(2)
-};
+$('.nav-btn-js').click(function(){
+  $(this).toggleClass('open-burg-js');
+});

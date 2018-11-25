@@ -1,2 +1,7 @@
 extends /layouts/layout
 block content
+    div(class=className('index', 'main'))
+
+        div(class=className('index', 'main-screen'))
+            include /components/main-screen/main-screen.pug
+                block main-screen
