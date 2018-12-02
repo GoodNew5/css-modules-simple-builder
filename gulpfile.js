@@ -4,6 +4,8 @@ const modules = require('postcss-modules');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const fs = require('fs');
+const assets  = require('postcss-assets');
+const removeFiles = require('gulp-remove-files');
 const pug = require('gulp-pug');
 const concat = require('gulp-concat');
 const sass = require('gulp-sass');
@@ -14,7 +16,7 @@ const babel = require('gulp-babel');
 const flatten = require('gulp-flatten');
 const sync = require('browser-sync').create();
 const clean = require('gulp-clean');
-
+const sprites = require('postcss-sprites');
 const svgSprite = require('gulp-svg-sprite');
 const PATHS = {
   moduleStyles: 'src/templates/**/*.scss',
@@ -24,8 +26,8 @@ const PATHS = {
 
 const GLOBAL_IMPOPTS_SCSS = [
   "./src/scss/abstract/vars.scss",
-  "./src/scss/abstract/mixins.scss",
-  "./src/scss/abstract/_sprite.scss"
+  "./src/scss/abstract/import-mixins.scss",
+  "./src/scss/abstract/sprite.scss"
 ];
 
 
@@ -74,6 +76,7 @@ gulp.task('copy:structure_folders_modules', function () {
     .pipe(gulp.dest('./scoped-modules'));
 });
 
+
 gulp.task('compile:module_styles', function () {
   return gulp.src([PATHS.moduleStyles])
     .pipe(map(function (file, cb) {
@@ -105,6 +108,13 @@ gulp.task('compile:module_styles', function () {
         getJSON: getJSONFromCssModules,
         generateScopedName: '[name]__[local]___[hash:base64:5]'
       }),
+      assets({
+        loadPaths: ['./dist/src/templates/**/png/']
+      }),
+      sprites({
+        stylesheetPath: './dist',
+        spritePath: './dist/png/'
+      })
     ]))
     .pipe(concat('main.css'))
     .pipe(gulp.dest('dist'))
@@ -155,12 +165,27 @@ gulp.task('compile:js', function() {
     .pipe(gulp.dest('./dist/js'))
 });
 
+gulp.task('merge:styles', function () {
+  return gulp.src('./dist/*.css')
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest('./dist'))
+});
+
+gulp.task('remove:originalStyles', function () {
+  return gulp.src('./dist/app.css')
+    .pipe(removeFiles())
+});
+
+gulp.task('css:build', gulp.series('merge:styles', 'remove:originalStyles'));
+
 
 
 gulp.task('copy:assets', function(){
   return gulp.src(['src/assets/{fonts,images}/**/*'])
     .pipe(gulp.dest('./dist'));
 });
+
+
 
 
 gulp.task('generate:svg', function() {
@@ -180,8 +205,8 @@ gulp.task('generate:svg', function() {
           prefix : "@mixin sprite-%s",
           render:{
             scss: {
-              template: './src/scss/abstract/sprite-template.scss',
-              dest: '_sprite.scss'
+              template: './src/scss/abstract/mixins/sprite-template.scss',
+              dest: 'sprite.scss'
             }
           }
         }

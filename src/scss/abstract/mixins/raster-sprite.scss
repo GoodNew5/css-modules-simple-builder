@@ -1,0 +1,6 @@
+@mixin sprite($name) {
+  background-image: resolve('png/#{$name}');
+  width: width('png/#{$name}');
+  height: height('png/#{$name}');
+  background-size: size('png/#{$name}');
+}

@@ -1,0 +1,243 @@
+@mixin common-line {
+  display: block;
+  position: absolute;
+  height: .2rem;
+  width: 100%;
+  border-radius: .2rem;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+  background-color: $default;
+}
+
+.header {
+  position: fixed;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(2, auto);
+  grid-auto-rows: repeat(4, minmax(100px, auto));
+  grid-template-areas: "logo burg"
+                       "search search"
+                       "sign sign"
+                       "nav nav";
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-sizing: content-box;
+  max-width: 110rem;
+  padding: 1.4rem 1rem;
+  font-size: 1.4rem;
+  background-color: $yellow;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
+  @include z-index(footer);
+
+  @include media($md) {
+    grid-template-columns: 2fr 3fr;
+    grid-auto-rows: repeat(3, minmax(100px, auto));
+    grid-template-areas: "logo burg"
+                         "nav search"
+                         "nav sign";
+  }
+
+  @include media($lg) {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-auto-rows: auto;
+    grid-template-areas: "logo search search sign burg"
+                         "nav nav nav nav nav";
+  }
+
+  @include media($xl) {
+    grid-template-columns: max(20rem) 3fr max(30rem) max(27rem);
+    grid-template-areas: "logo search nav sign";
+    padding: 1.4rem calc(50% - 55rem);
+  }
+}
+
+
+.logo-btn {
+  grid-area: logo;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+.logo {
+  @include sprite-logo();
+}
+
+
+.search {
+  grid-area: search;
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 36rem;
+  height: 5rem;
+  width: 100%;
+  @include media($md) {
+    justify-self: start;
+  }
+  @include media($lg) {
+    display: flex !important;
+  }
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    @include sprite-search-icon;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 5rem;
+    background-color: $yellow-dark;
+    height: 3.1rem;
+    width: .1rem;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    background-color: $yellow-deep;
+    color: $white;
+    font-size: 1.4rem;
+    padding-left: 6.5rem;
+    text-overflow: ellipsis;
+    @include placeholder {
+      color: $white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.nav {
+  grid-area: nav;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  //align-items: center;
+  width: 100%;
+  max-height: 14.5rem;
+  margin: 0 -2rem;
+  max-width: 30rem;
+
+  @include media($xl) {
+    flex-flow: row wrap;
+    justify-content: end;
+    width: auto;
+  }
+
+  .item {
+    color: $default;
+    font-weight: 100;
+    margin: 1rem 2rem;
+
+    @include media($xl) {
+      margin: .5rem 1.5rem;
+    }
+  }
+}
+
+.sign {
+  grid-area: sign;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  @include media($md) {
+    margin: 0 auto 0 0;
+  }
+  @include media($lg) {
+    width: 100%;
+    justify-content: flex-end;
+    margin: 0;
+    display: flex !important;
+  }
+  @include media($xl) {
+    justify-content: flex-end;
+  }
+  .btn {
+    @include button($color: $default, $padding: 1.5rem 2.3rem, $height: auto);
+    &:first-of-type {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.nav-btn {
+  grid-area: burg;
+  justify-self: end;
+  width: 3rem;
+  height: 2rem;
+  position: relative;
+  transform: rotate(0deg);
+  transition: .3s ease-in-out;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  @include media($xl) {
+    display: none;
+  }
+}
+
+.top {
+  top: 0;
+  @include common-line;
+}
+
+.mid {
+  top: 50%;
+  transform: translateY(50%);
+  @include common-line;
+}
+
+.bottom {
+  bottom: -.2rem;
+  @include common-line;
+}
+
+:global(.nav-btn-js.open-burg-js) {
+  .top {
+    transform: translateY(1rem) rotate(45deg);
+  }
+
+  .mid {
+    width: 0%;
+    opacity: 0;
+  }
+
+  .bottom {
+    transform: translateY(-1rem) rotate(-45deg);
+  }
+}
+
+
+:global(.nav-js) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  @media screen and (max-width: 1119px) {
+    display: none;
+  }
+}
+
+:global(.nav-js.open-nav-js) {
+  display: flex;
+  @include media($xl) {
+    display: flex;
+  }
+}

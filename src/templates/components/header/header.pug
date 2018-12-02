@@ -1,18 +1,23 @@
-header(class=className('header', 'header'))
+header(class=className('header', 'header'), class='header-js')
     block header
 
-        div(class=className('header', 'logo'))
-        div(class=className('header', 'search'))
+        div(class=className('header', 'logo-btn'))
+            div(class=className('header', 'logo'))
+
+        div(class=className('header', 'search'), class='nav-js')
             input(placeholder='Search for projects or forum topics')
 
-        div(class=className('header', 'nav'))
+
+        div(class=className('header', 'sign'), class='nav-js')
+            button(class=className('header', 'btn')) Register
+            button(class=className('header', 'btn')) Log in With Github
+
+
+        div(class=className('header', 'nav'), class='nav-js')
             a(class=className('header', 'item'), href="#") Learn
             a(class=className('header', 'item'), href="#") Projects
             a(class=className('header', 'item'), href="#") Forums
 
-        div(class=className('header', 'sign'))
-            button(class=className('header', 'btn')) Register
-            button(class=className('header', 'btn')) Log in With Github
 
         div(class=className('header', 'nav-btn'), class='nav-btn-js')
             div(class=className('header', 'top'))

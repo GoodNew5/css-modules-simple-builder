@@ -1,0 +1,7 @@
+@mixin ellipse($size: 10rem, $display: block) {
+  border-radius: 50%;
+  display: $display;
+  width: $size;
+  height: $size;
+  @content;
+}
