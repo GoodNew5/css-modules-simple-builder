@@ -10,6 +10,7 @@ const pug = require('gulp-pug');
 const concat = require('gulp-concat');
 const sass = require('gulp-sass');
 sass.compiler = require('node-sass');
+const cleanCSS = require('gulp-clean-css');
 const map = require('map-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
@@ -18,6 +19,7 @@ const sync = require('browser-sync').create();
 const clean = require('gulp-clean');
 const sprites = require('postcss-sprites');
 const svgSprite = require('gulp-svg-sprite');
+const mqpacker = require('css-mqpacker');
 const PATHS = {
   moduleStyles: 'src/templates/**/*.scss',
   globalStyles: 'src/scss/app.scss',
@@ -114,7 +116,8 @@ gulp.task('compile:module_styles', function () {
       sprites({
         stylesheetPath: './dist',
         spritePath: './dist/png/'
-      })
+      }),
+      mqpacker()
     ]))
     .pipe(concat('main.css'))
     .pipe(gulp.dest('dist'))
@@ -168,6 +171,7 @@ gulp.task('compile:js', function() {
 gulp.task('merge:styles', function () {
   return gulp.src('./dist/*.css')
     .pipe(concat('main.css'))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('./dist'))
 });
 

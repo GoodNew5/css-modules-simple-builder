@@ -3,7 +3,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  background: url("images/img/bg.svg") center 9.3rem no-repeat, $yellow;
+  background: url("images/bg.svg") center 9.3rem no-repeat, $yellow;
   background-size: contain;
   @include z-index(share);
 }
@@ -21,8 +21,7 @@
 
 
 .title {
-  //@include sprite('qwqw.jpg');
-  @include font($size: 4.4rem, $weight: 100);
+  @include font($size: 4.4rem, $weight: 400);
 
   span {
     font-weight: bold;
