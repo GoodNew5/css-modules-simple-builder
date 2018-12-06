@@ -118,10 +118,10 @@ gulp.task('compile:module_styles', function () {
         spritePath: './dist/png/'
       }),
       mqpacker()
-    ]))
+      ]))
     .pipe(concat('main.css'))
     .pipe(gulp.dest('dist'))
-    .pipe(sync.stream());
+    .pipe(sync.stream())
 });
 
 gulp.task('compile:global_styles', function () {
@@ -171,7 +171,7 @@ gulp.task('compile:js', function() {
 gulp.task('merge:styles', function () {
   return gulp.src('./dist/*.css')
     .pipe(concat('main.css'))
-    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(cleanCSS({compatibility: 'ie10'}))
     .pipe(gulp.dest('./dist'))
 });
 

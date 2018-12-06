@@ -16,8 +16,6 @@
 {{/hasCommon}}background-position: {{position.relative.xy}};{{#dimensions.inline}}
   width: {{width.outer}}px;
   height: {{height.outer}}px;{{/dimensions.inline}}
-  width: {{width.outer}}px;
-  height: {{height.outer}}px;
 }
 
 {{/shapes}}

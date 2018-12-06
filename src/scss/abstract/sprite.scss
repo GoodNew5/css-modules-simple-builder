@@ -4,28 +4,15 @@
 
 @mixin sprite-logo {
 @include svg-common;
-background-position: 0 100%;
-  width: 156px;
-  height: 48px;
-  width: 156px;
-  height: 48px;
-}
-
-@mixin sprite-main-screen-bg {
-@include svg-common;
 background-position: 0 0;
-  width: 1226px;
-  height: 376px;
-  width: 1226px;
-  height: 376px;
+  width: 156px;
+  height: 48px;
 }
 
 @mixin sprite-search-icon {
 @include svg-common;
-background-position: 12.946058091286307% 93.30024813895781%;
-  width: 21px;
-  height: 21px;
-  width: 21px;
-  height: 21px;
+background-position: 0 100%;
+  width: 37px;
+  height: 33px;
 }
 

@@ -13,15 +13,41 @@
 
 .header {
   position: fixed;
-  display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(2, auto);
-  grid-auto-rows: repeat(4, minmax(100px, auto));
-  grid-template-areas: "logo burg"
-                       "search search"
-                       "sign sign"
-                       "nav nav";
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
   align-items: center;
+
+  @supports (display: grid) {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat(2, auto);
+    grid-auto-rows: repeat(4, minmax(100px, auto));
+    grid-template-areas: "logo burg"
+                         "search search"
+                         "sign sign"
+                         "nav nav";
+    @include media($md) {
+      grid-template-columns: 2fr 3fr;
+      grid-auto-rows: repeat(3, minmax(100px, auto));
+      grid-template-areas: "logo burg"
+                           "nav search"
+                           "nav sign";
+    }
+
+    @include media($lg) {
+      grid-template-columns: repeat(5, auto);
+      grid-auto-rows: auto;
+      grid-template-areas: "logo search search sign burg"
+                           "nav nav nav nav nav";
+    }
+
+    @include media($xl) {
+      grid-template-columns: max(20rem) 3fr max(30rem) max(27rem);
+      grid-template-areas: "logo search nav sign";
+      padding: 1.4rem calc(50% - 55rem);
+    }
+  }
   top: 0;
   left: 0;
   right: 0;
@@ -33,58 +59,59 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2);
   @include z-index(footer);
 
-  @include media($md) {
-    grid-template-columns: 2fr 3fr;
-    grid-auto-rows: repeat(3, minmax(100px, auto));
-    grid-template-areas: "logo burg"
-                         "nav search"
-                         "nav sign";
-  }
-
-  @include media($lg) {
-    display: grid;
-    grid-template-columns: repeat(5, auto);
-    grid-auto-rows: auto;
-    grid-template-areas: "logo search search sign burg"
-                         "nav nav nav nav nav";
-  }
-
   @include media($xl) {
-    grid-template-columns: max(20rem) 3fr max(30rem) max(27rem);
-    grid-template-areas: "logo search nav sign";
     padding: 1.4rem calc(50% - 55rem);
   }
 }
 
 
-.logo-btn {
-  grid-area: logo;
+.logo-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-}
+  margin-right: 2rem;
 
+  @supports (display: grid) {
+    grid-area: logo;
+    width: 100%;
+      margin: 0;
+  }
 
-.logo {
-  @include sprite-logo();
+  .logo {
+    @include sprite-logo();
+  }
 }
 
 
 .search {
-  grid-area: search;
   position: relative;
   display: flex;
   align-items: center;
   max-width: 36rem;
   height: 5rem;
-  width: 100%;
-  @include media($md) {
-    justify-self: start;
+  order: 2;
+  flex: 1 2;
+  min-width: 30rem;
+  @include media($md-6) {
+    min-width: 20rem;
+  }
+  @include media($header-order) {
+    order: 1;
+  }
+  @include  media($header-flex) {
+    flex: 0 0 100%;
   }
   @include media($lg) {
     display: flex !important;
   }
+  @supports (display: grid) {
+    grid-area: search;
+    width: 100%;
+    @include media($md) {
+      justify-self: start;
+    }
+  }
+
   &:before {
     content: '';
     display: block;
@@ -99,14 +126,7 @@
   &:after {
     content: '';
     display: block;
-    position: absolute;
-    left: 5rem;
-    background-color: $yellow-dark;
-    height: 3.1rem;
-    width: .1rem;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
+    @include alpha-gradient($position: right, $color: $yellow-deep, $width: 2rem);
   }
 
   input {
@@ -127,20 +147,27 @@
 }
 
 .nav {
-  grid-area: nav;
+  order: 4;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
-  //align-items: center;
-  width: 100%;
   max-height: 14.5rem;
-  margin: 0 -2rem;
   max-width: 30rem;
-
+  width: 100%;
   @include media($xl) {
-    flex-flow: row wrap;
-    justify-content: end;
+    max-width: 23.5rem;
     width: auto;
+    order: 1;
+    flex-flow: row wrap;
+  }
+
+  @supports (display: grid) {
+    grid-area: nav;
+    margin: 0 -2rem;
+    @include media($xl) {
+      justify-content: end;
+      width: auto;
+    }
   }
 
   .item {
@@ -155,22 +182,27 @@
 }
 
 .sign {
-  grid-area: sign;
+  order: 2;
   display: flex;
   align-items: center;
-  margin: 0 auto;
-  @include media($md) {
-    margin: 0 auto 0 0;
-  }
+  margin: 0 1rem;
+
   @include media($lg) {
-    width: 100%;
     justify-content: flex-end;
-    margin: 0;
     display: flex !important;
   }
   @include media($xl) {
     justify-content: flex-end;
   }
+
+  @supports (display: grid) {
+    grid-area: sign;
+    margin: 0 auto;
+    @include media($md) {
+      margin: 0 auto 0 0;
+    }
+  }
+
   .btn {
     @include button($color: $default, $padding: 1.5rem 2.3rem, $height: auto);
     &:first-of-type {
@@ -179,9 +211,11 @@
   }
 }
 
+
+//burger
+
 .nav-btn {
-  grid-area: burg;
-  justify-self: end;
+  order: 1;
   width: 3rem;
   height: 2rem;
   position: relative;
@@ -189,9 +223,16 @@
   transition: .3s ease-in-out;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-
+  @include media($header-wrap-2) {
+    order: 3;
+  }
   @include media($xl) {
     display: none;
+  }
+
+  @supports (display: grid) {
+    grid-area: burg;
+    justify-self: end;
   }
 }
 
