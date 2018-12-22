@@ -1,49 +1,49 @@
 .main-screen {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  background: url("images/bg.svg") center 9.3rem no-repeat, $yellow;
-  background-size: contain;
-  @include z-index(share);
+	position: relative;
+	background: url("images/bg.svg") 9.3rem no-repeat, $yellow;
+	background-size: contain;
+	background-position: -2rem 16rem;
+	padding: 0 1rem;
+
+	@include media($md-6) {
+		padding: 0 2rem;
+	}
+	@include z-index(share);
 }
 
 
 .text-wrapp {
-  display: flex;
-  align-items: center;
-  flex-flow: column;
-  margin-top: 8.4rem;
-  margin-bottom: 16.3rem;
-  padding: 4rem 0;
-  @include z-index(share-type);
+	margin: 7rem 0;
+	padding: 4rem 0;
+	@include z-index(share-type);
+
+	@include media($xl) {
+		margin-top: 16rem;
+	}
 }
 
 
 .title {
-  @include font($size: 4.4rem, $weight: 400);
-
-  span {
-    font-weight: bold;
-  }
+	text-align: center;
+	span {
+		font-weight: bold;
+	}
 }
 
 
 .sub-title {
-  margin-top: 1rem;
-  @include font($size: 2.4rem, $weight: 100);
+	margin-top: 1rem;
 }
 
 
 .call-back {
-  margin-top: 11.5rem;
-  @include font($size: 1.6rem);
+	margin-top: 11.5rem;
+	
 }
 
 
 .btn {
-  margin-top: 1.5rem;
-  @include button($color: $default, $padding: 1.6rem 4.4rem, $height: auto);
+	margin-top: 1.5rem;
 }
 
 

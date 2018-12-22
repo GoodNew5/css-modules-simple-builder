@@ -1,16 +1,16 @@
 @mixin button($color: $gray, $padding: 1rem 2rem, $height: 5rem, $font-size: 1.4rem, $fill: transparent, $display: flex) {
-  color: $color;
-  padding: $padding;
-  height: $height;
-  border: 2px solid $default;
-  display: $display;
-  align-items: center;
-  font-weight: bold;
-  justify-content: center;
-  font-size: $font-size;
-  background-color: $fill;
-  cursor: pointer;
-  overflow: hidden;
-  white-space: nowrap;
-  @content;
+	color: $color;
+	padding: $padding;
+	height: $height;
+	border: 2px solid $color;
+	display: $display;
+	align-items: center;
+	font-weight: bold;
+	justify-content: center;
+	font-size: $font-size;
+	background-color: $fill;
+	cursor: pointer;
+	overflow: hidden;
+	white-space: nowrap;
+	@content;
 }

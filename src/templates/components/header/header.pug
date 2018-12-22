@@ -1,25 +1,28 @@
 header(class=className('header', 'header'), class='header-js')
-    block header
+	block header
 
-        div(class=className('header', 'logo-wrap'))
-            div(class=className('header', 'logo'))
-
-        div(class=className('header', 'search'), class='nav-js')
-            input(placeholder='Search for projects or forum topics')
+		div(class=className('header', 'header--logo'))
+			p css-modules-simple-builder
 
 
-        div(class=className('header', 'sign'), class='nav-js')
-            button(class=className('header', 'btn')) Register
-            button(class=className('header', 'btn')) Log in With Github
+		div(class=className('header', 'search header--search'), class='nav-js')
+			include /components/input/input.pug
+				block input
 
 
-        div(class=className('header', 'nav'), class='nav-js')
-            a(class=className('header', 'item'), href="#") Learn
-            a(class=className('header', 'item'), href="#") Projects
-            a(class=className('header', 'item'), href="#") Forums
+		div(class=className('header', 'sign header--sign'), class='nav-js')
+			button(class=className('header', 'btn'), class='button') download
+			button(class=className('header', 'btn'), class='button') github
 
 
-        div(class=className('header', 'nav-btn'), class='nav-btn-js')
-            div(class=className('header', 'top'))
-            div(class=className('header', 'mid'))
-            div(class=className('header', 'bottom'))
+		div(class=className('header', 'nav header--nav'), class='nav-js')
+			a(class=className('header', 'item'), href="#") item
+			a(class=className('header', 'item'), href="#") item
+			a(class=className('header', 'item'), href="#") item
+
+
+		div(class=className('header', 'wrap-burger header--burger'), class='burger-js')
+			div(class=className('header', 'burger'))
+					div(class=className('header', 'top'))
+					div(class=className('header', 'mid'))
+					div(class=className('header', 'bottom'))

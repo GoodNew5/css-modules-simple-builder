@@ -5,15 +5,14 @@ $default: #363C44;
 $yellow: #FFCF27;
 $yellow-deep: #E6BB22;
 $yellow-dark: #CCA61F;
+$purple: #9855D4;
 
 //break-point
 $xs: 0;
 $md: 500px;
 $md-6: 600px;
 $lg: 760px;
+$lg--header: 920px; 
 $xl: 1120px;
-$header-wrap: 740px;
-$header-wrap-2: 738px;
-$header-row: 838px;
-$header-flex: 898px;
-$header-order: 526px;
+
+background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.001) 0%, #fff 5%, #fff 100%);

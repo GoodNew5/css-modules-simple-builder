@@ -2,7 +2,6 @@ html, body {
   border: 0;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 div, span, object, iframe, img, table, caption, thead, tbody,
@@ -11,7 +10,6 @@ nav, footer, header, section, summary, mark, audio, video {
   border: 0;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cit, code,
@@ -19,11 +17,9 @@ del, dfn, em, ins, q, samp, small, strong, sub, sup, b, i, hr, dl, dt, dd,
 ol, ul, li, fieldset, legend, label {
   border: 0;
   font-size: 100%;
-  -webkit-text-size-adjust: 100%;
   vertical-align: baseline;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 article, aside, canvas, figure, figure img, figcaption, hgroup,
@@ -39,40 +35,13 @@ table {
     vertical-align: middle;
   }
 }
-ul, ol{
-  list-style-type: none;
-}
-
-textarea, button, input{
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
-  outline: none;
-  border-radius: 0;
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  font-family: inherit;
-}
-
-h1, h2, h3, h4, h5, h6, a, p{
-  word-wrap: break-word;
-}
-
-a{
-  display: inline-block;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-img{
-  max-width: 100%;
-}
 
 a img {
   border: 0;
 }
-
+a {
+  text-decoration: none;
+}
 :focus {
   outline: 0;
 }

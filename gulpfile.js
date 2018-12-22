@@ -158,7 +158,7 @@ gulp.task('remove:json', function () {
 
 
 gulp.task('compile:js', function() {
-  return gulp.src('./src/assets/js/**/*.js')
+  return gulp.src('./src/templates/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
@@ -227,7 +227,7 @@ gulp.task('serve', function () {
   sync.init({
       server: "./dist",
       host: '3010',
-      open: false,
+      open: true,
       notify: false,
       watch: true
     });
@@ -253,3 +253,4 @@ gulp.task('run', gulp.series(
   'copy:assets',
   'generate:svg',
   'serve'));
+

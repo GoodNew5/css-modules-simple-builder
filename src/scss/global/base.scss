@@ -1,49 +1,95 @@
+@import "../abstract/vars";
+@import "../abstract/import-mixins";
+
+
 html {
-  font-size: 62.5%;
-  min-width: 320px;
-  word-wrap: break-word;
+	font-size: 62.5%;
+	min-width: 320px;
+	word-wrap: break-word;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased;
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
 }
 
-//
-//
-//.main-title {
-//  font-size: 3rem;
-//  @include media($lg) {
-//    font-size: 4.5rem;
-//  }
-//}
-//
-//.sub-title {
-//  font-size: 2rem;
-//  @include media($lg) {
-//    font-size: 2.4rem;
-//  }
-//}
-//
-//.large-bold {
-//  font-size: 3.2rem;
-//  @include media($lg) {
-//    font-size: 4.8rem;
-//  }
-//}
-//
-//.title {
-//  font-size: 2.6rem;
-//  @include media($lg) {
-//    font-size: 3.6rem;
-//  }
-//}
-//
-//.paragraph {
-//  font-size: 1.6rem;
-//}
-//
-//.paragraph-small {
-//  font-size: 1.4rem;
-//}
+
+.button {
+	@include button($color: $default, $padding: 1.5rem 2.3rem, $height: auto);
+
+	&--large-padding {
+		@include button($color: $default, $padding: 1.6rem 4.4rem, $height: auto);
+	}
+
+	&--color-white {
+		@include button($color: $white, $padding: 1.5rem 2.3rem, $height: auto);
+	}
+}
+
+
+.main-title {
+
+	@include font($size: 3rem);
+
+	@include media($lg) {
+
+		@include font($size: 4.5rem);
+
+	}
+}
+
+
+.sub-title {
+
+	@include font($size: 2rem);
+
+	@include media($lg) {
+
+		@include font($size: 2.4rem);
+
+	}
+}
+
+
+.large-bold {
+
+	@include font($size: 3.2rem);
+
+	@include media($lg) {
+
+		@include font($size: 4.8rem);
+
+	}
+}
+
+
+.title {
+
+	@include font($size: 2.6rem);
+
+	@include media($lg) {
+
+		@include font($size: 3.6rem);
+
+	}
+}
+
+
+.paragraph {
+
+	@include font($size: 1.6rem);
+
+}
+
+
+.paragraph-small {
+
+	@include font($size: 1.4rem);
+
+}
+
+
+.color-white {
+	color: $white;
+}
