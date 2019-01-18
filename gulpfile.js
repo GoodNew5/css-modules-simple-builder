@@ -20,6 +20,7 @@ const clean = require('gulp-clean');
 const sprites = require('postcss-sprites');
 const svgSprite = require('gulp-svg-sprite');
 const mqpacker = require('css-mqpacker');
+const notify = require('gulp-notify');
 const PATHS = {
   moduleStyles: 'src/templates/**/*.scss',
   globalStyles: 'src/scss/app.scss',
@@ -103,7 +104,7 @@ gulp.task('compile:module_styles', function () {
       return cb(null, file);
     }))
 
-    .pipe(sass({includePaths: ['src/scss']}).on('error', sass.logError))
+    .pipe(sass({includePaths: ['src/scss']}).on("error", notify.onError()))
     .pipe(postcss([
       autoprefixer,
       modules({
@@ -147,6 +148,9 @@ gulp.task('render:templates', function () {
       basedir: './src/templates',
       locals: className = getClass
     }))
+    .on('error', notify.onError(function (error) {
+      return error.message;
+    }))
     .pipe(flatten())
     .pipe(gulp.dest('./dist'))
 });
@@ -162,6 +166,9 @@ gulp.task('compile:js', function() {
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015']
+    }))
+    .on('error', notify.onError(function (error) {
+      return error.message;
     }))
     .pipe(concat('common.js'))
     .pipe(sourcemaps.write('./'))
@@ -232,7 +239,7 @@ gulp.task('serve', function () {
       watch: true
     });
 
-    gulp.watch(['./src/assets/js/**/*.js'], gulp.task('compile:js'));
+    gulp.watch(['./src/templates/**/*.js'], gulp.task('compile:js'));
     gulp.watch(['./src/assets/{fonts,images}/**'], gulp.task('copy:assets'));
     gulp.watch(['./src/asset/{svg}/**'], gulp.task('generate:svg'));
     gulp.watch('./src/templates/**/*.scss', gulp.series('compile:module_styles', 'render:templates'));
